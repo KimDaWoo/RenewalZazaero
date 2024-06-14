@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import commonStyles from '../common/commonStyles'
+import commonStyles from '../common/commonStyles';
 
-const SmallCheckBoxText = ({text, Duty, onChange, isChecked}) => {
-    
+
+// mgBT 속성으로 체크박스텍스트에 마진바텀 여부를 결정할 수 있습니다.
+const SmallCheckBoxText = ({ text, onChange, isChecked, mgBT = true }) => {
     return (
-        <View style={[commonStyles.horizontalAlignment, styles.container]}>
+        <View style={[commonStyles.horizontalAlignment, mgBT ? styles.mgBT : null]}>
             <Pressable
                 style={[styles.checkbox, isChecked && styles.checkedCheckbox]}
                 onPress={onChange}
@@ -13,45 +14,40 @@ const SmallCheckBoxText = ({text, Duty, onChange, isChecked}) => {
                 {isChecked && <Text style={styles.checkmark}>✓</Text>}
             </Pressable>
             <Text style={styles.text}>{text}</Text>
-            {Duty && (<Text style={styles.duty}>(필수)</Text>)}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {
+    mgBT: {
         marginBottom: 14,
     },
+    margin: {
+        marginRight: 10,
+    },
     checkbox: {
-      width: 20,
-      height: 20,
-      borderWidth: 2,
-      borderRadius: 4,
-      borderColor: '#3D40E0',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginRight: 10,
+        width: 20,
+        height: 20,
+        borderWidth: 2,
+        borderRadius: 4,
+        borderColor: '#3D40E0',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10,
     },
     checkedCheckbox: {
-      borderColor: "#3D40E0",
-      backgroundColor: "#E4E4FA",
+        borderColor: "#3D40E0",
+        backgroundColor: "#E4E4FA",
     },
     checkmark: {
-      color: '#3D40E0',
-      fontSize: 12,
-      marginLeft: 2,
+        color: '#3D40E0',
+        fontSize: 12,
+        marginLeft: 2,
     },
-    text : {
-      fontSize: 14,
-      marginRight: 4,
-      fontWeight: '700',
+    text: {
+        fontSize: 14,
+        fontWeight: '700',
     },
-    duty: {
-        color: "#3D40E0"
-    },
-    noneDuty: {
-        color: "#6c6c6c"
-    }
 });
 
-export default SmallCheckBoxText
+export default SmallCheckBoxText;

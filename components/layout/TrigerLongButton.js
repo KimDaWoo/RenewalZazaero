@@ -4,7 +4,7 @@ import { Text, TextInput, StyleSheet, TouchableOpacity, View } from 'react-nativ
 const TrigerLongButton = ({BtnText, Triger, Handling}) => {
    return (
     <View style={styles.BtnContainer}>
-        <TouchableOpacity style={Triger ? styles.BtnEnable : styles.BtnDisable} onPress={Handling}>
+        <TouchableOpacity style={[styles.BtnBox, Triger ? styles.BtnEnable : styles.BtnDisable]} onPress={Handling}>
             <Text style={styles.BtnText}>{BtnText}</Text>
         </TouchableOpacity>
     </View>
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop : 18,
     },
+    
     BtnEnable : {
         ...btn,
         backgroundColor: '#3D40E0', 
@@ -43,6 +44,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         textAlign: 'center',
-        letterSpacing : 1.5,
-    },
+        letterSpacing : 1.2,
+    }, 
 })

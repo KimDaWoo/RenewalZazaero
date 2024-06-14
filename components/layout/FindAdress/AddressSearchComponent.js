@@ -3,10 +3,25 @@ import { View, StyleSheet } from 'react-native';
 import InputWithButton from '../TextInputList/InputWithButton';
 import LongInput from '../TextInputList/LongInput';
 
-const AddressSearchComponent = ({ navigation, route, onAddressSelected }) => {
+const AddressSearchComponent = ({ navigation, route, onAddressSelected, completion, updateCompletion }) => {
   const [postcode, setPostcode] = useState('');
   const [address, setAddress] = useState('');
   const [detailAddress, setDetailAddress] = useState('');
+
+  useEffect(()=> {
+      if(postcode !== '' && address !== '' && detailAddress !=='') {
+          updateCompletion({
+              ...completion,
+              address: true,
+          });
+      }
+      else {
+          updateCompletion({
+              ...completion,
+              address: false,
+          });
+      }
+  }, [postcode, address, detailAddress])
 
   useEffect(() => {
     if (route?.params?.postcode && route?.params?.address) {
@@ -22,7 +37,7 @@ const AddressSearchComponent = ({ navigation, route, onAddressSelected }) => {
         placeholder="우편번호"
         value={postcode}
         editable={false}
-        buttonText="주소 찾기"
+        buttonText="주소찾기"
         onButtonPress={() => navigation.navigate('AddressSearch')}
       />
       <LongInput

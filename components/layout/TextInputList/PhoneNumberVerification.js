@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
 import InputWithButton from './InputWithButton'; // 기존 InputWithButton 컴포넌트를 임포트합니다
 import commonStyles from '../../layout/common/commonStyles.js';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const PhoneNumberVerification = () => {
+const PhoneNumberVerification = ({ completion, updateCompletion, onPhoneNumberChange}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [isVerificationSent, setIsVerificationSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isVerificationButtonDisabled, setIsVerificationButtonDisabled] = useState(false);
 
+
+
+  useEffect(()=> {
+        if(isVerified) {
+            updateCompletion({
+                ...completion,
+                phone: true,
+            });
+        }
+        else {
+            updateCompletion({
+                ...completion,
+                phone: false,
+            });
+        }
+    }, [isVerified])
 
   const validatePhoneNumber = (number) => {
     const phoneRegex = /^(\d{3})-(\d{4})-(\d{4})$/;
@@ -21,13 +36,18 @@ const PhoneNumberVerification = () => {
     setIsVerified(false); // 전화번호 변경 시 인증 상태 해제
     setIsVerificationButtonDisabled(false); // 전화번호 변경 시 재발급 버튼 활성화
     const cleaned = ('' + text).replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{3})(\d{3,4})(\d{4})$/);
-    if (match) {
-      setPhoneNumber(`${match[1]}-${match[2]}-${match[3]}`);
+    let formattedNumber = '';
+    if (cleaned.length <= 3) {
+      formattedNumber = cleaned;
+    } else if (cleaned.length <= 7) {
+      formattedNumber = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
     } else {
-      setPhoneNumber(text);
+      formattedNumber = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 7)}-${cleaned.slice(7, 11)}`;
     }
+    setPhoneNumber(formattedNumber);
+    onPhoneNumberChange(formattedNumber);
   };
+
 
   const sendVerificationCode = () => {
     if (validatePhoneNumber(phoneNumber)) {

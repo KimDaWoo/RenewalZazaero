@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     width: '100%', // 전체 너비
     height: 1, // 1 픽셀 높이로 실선
     backgroundColor: 'gray', // 검정색
-    marginHorizontal: -24,
   },
 });
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginIMG from "../../../assets/m_logo.png"
+import { useFocusEffect } from '@react-navigation/native';
 import TrigerLongButton from '../../layout/TrigerLongButton.js';
 import commonStyles from '../../layout/common/commonStyles.js'
 import LongInput from '../../layout/TextInputList/LongInput.js';
@@ -31,6 +32,19 @@ const Login = ({ navigation }) => {
         }
       }
     };
+
+    useFocusEffect( // 화면 이탈 시 기존 입력 값들은 사라집니다.
+      React.useCallback(() => {
+        // 화면에 포커스될 때마다 ID와 PW 초기화
+        setID('');
+        setPW('');
+        setWanning('');
+  
+        return () => {
+          // 화면에서 포커스가 벗어날 때의 동작 (cleanup)
+        };
+      }, [])
+    );
 
   return (
     <View style={[commonStyles.mainContainer_1, commonStyles.justifyCntCneter]}>

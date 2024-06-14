@@ -31,13 +31,6 @@ const styles = StyleSheet.create({
     padding: 24,
   },
 
-  container: {
-    flexDirection: 'center',
-    alignItems: 'flex-start',
-    width: '94%',
-    marginBottom: 14,
-    marginTop: 14,
-  },
   horizontalAlignment: { //여러 컴포넌트를 가로 일렬 정렬 시, View Style로 사용 가능
     flexDirection: 'row',
     alignItems: 'center',

@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#3D40E0',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 9,
     borderRadius: 4,
-    marginLeft: 8,
-    width: "24%",
+    marginLeft: 16,
+    width: "20%",
     justifyContent: "center",
     alignItems: "center"
   },
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   buttonDisabled: {
-    backgroundColor: '#A0A0A0', // 비활성화된 버튼 색상
+    backgroundColor: '#6c6c6c', // 비활성화된 버튼 색상
   },
 });
 

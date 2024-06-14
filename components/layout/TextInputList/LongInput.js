@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const LongInput = ({ placeholder, value, onChangeText, secure, extraStyles, editable }) => {
+const LongInput = ({ placeholder, value, onChangeText, secure, extraStyles, editable, keyboardType, maxLength}) => {
   const [isFocused, setIsFocused] = useState(false);
     return (
       <TextInput
@@ -14,6 +14,8 @@ const LongInput = ({ placeholder, value, onChangeText, secure, extraStyles, edit
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           editable={editable} // 편집 가능 여부
+          keyboardType = {keyboardType}
+          maxLength = {maxLength}
       />
     );
 };
