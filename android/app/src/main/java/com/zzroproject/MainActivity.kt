@@ -1,4 +1,4 @@
-package com.zzroproject
+package com.www.zazaero_3_0
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

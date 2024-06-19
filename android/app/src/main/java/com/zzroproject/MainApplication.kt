@@ -1,4 +1,4 @@
-package com.zzroproject
+package com.www.zazaero_3_0
 
 import android.app.Application
 import com.facebook.react.PackageList

@@ -9,8 +9,10 @@ const ModalComponent = ({
   modalImage,
   buttonCount,
   button1Text,
+  button1Color = "#3D40E0",
   button1Action,
   button2Text,
+  button2Color = "#3D40E0",
   button2Action,
 }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current; // 초기 값 설정
@@ -58,23 +60,31 @@ const ModalComponent = ({
       marginBottom: 10,
     },
     buttonContainer: {
-      flexDirection: buttonCount === 1 ? 'row' : 'column', // 버튼이 1개인 경우 가로 정렬, 2개인 경우 세로 정렬
+      flexDirection: 'row',
       marginTop: 10,
     },
     button: {
       flex: buttonCount === 1 ? 1 : 0, // 버튼이 1개인 경우 가로 폭을 균등하게, 2개인 경우 고정 폭
       paddingVertical: 8,
       paddingHorizontal: 16,
-      marginHorizontal: buttonCount === 2 ? 8 : 0, // 버튼 간격 설정
+     
       backgroundColor: '#3D40E0', // 버튼 배경색
       borderRadius: 5,
       justifyContent: 'center',
       alignItems: 'center',
+      width: buttonCount === 2 ? "47%" : "100%",
     },
     buttonText: {
       color: 'white',
       fontWeight: 'bold',
+      fontSize: 16,
     },
+    innerText: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: "#141414",
+      marginBottom: 14,
+    }
   });
 
   return (
@@ -87,7 +97,7 @@ const ModalComponent = ({
       <View style={modalStyles.modalContainer}>
         <Animated.View style={modalStyles.modalContent}>
           {modalImage && <Image source={modalImage} style={modalStyles.modalImage} />}
-          <Text>{innerText}</Text>
+          <Text style={modalStyles.innerText}>{innerText}</Text>
           <View style={modalStyles.buttonContainer}>
             {buttonCount >= 1 && (
               <TouchableOpacity style={modalStyles.button} onPress={button1Action}>
@@ -95,7 +105,7 @@ const ModalComponent = ({
               </TouchableOpacity>
             )}
             {buttonCount === 2 && (
-              <TouchableOpacity style={modalStyles.button} onPress={button2Action}>
+              <TouchableOpacity style={[modalStyles.button, { marginLeft: "6%", backgroundColor: button2Color }]} onPress={button2Action}>
                 <Text style={modalStyles.buttonText}>{button2Text}</Text>
               </TouchableOpacity>
             )}
@@ -111,7 +121,7 @@ export default ModalComponent;
 
 // <ModalComponent
 //     isVisible={modalVisible}
-//     closeModal={() => setModalVisible(false)}
+//     closeModal={() => setModalVisible(false)} 즉, 
 //     innerText="로그인 페이지로 돌아 가시겠습니까?"
 //     buttonCount={2}
 //     button1Text="예"

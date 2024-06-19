@@ -1,15 +1,17 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import RootStack from './components/RootStack';
+import { ToastModule } from './components/layout/common/ToastModule';
 
 function App() {
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+      <ToastModule />
+    </>
   );
 }
-
 
 export default App;
